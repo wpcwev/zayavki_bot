@@ -454,7 +454,7 @@ async def direction_chosen(message: types.Message, state: FSMContext):
 
     await state.update_data(direction=message.text)
     await message.answer(
-        "Введите суммы заявки одним сообщением.\n\n"
+        "Введите сумму заявки одним сообщением.\n\n"
         "Можно несколько сумм, каждую с новой строки.\n"
         "Важно: каждая строка должна начинаться с цифры.\n\n"
         "Примеры:\n"
