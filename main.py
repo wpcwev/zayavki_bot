@@ -156,7 +156,7 @@ def traffic_kb() -> ReplyKeyboardMarkup:
 def exchange_kb() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Bybit"), KeyboardButton(text="HTX")],
+            [KeyboardButton(text="Bybit"), KeyboardButton(text="HTX"), KeyboardButton(text="Bybit/HTX")]
         ],
         resize_keyboard=True,
         one_time_keyboard=True,
@@ -612,7 +612,7 @@ async def traffic_custom_entered(message: types.Message, state: FSMContext):
 
 async def exchange_chosen(message: types.Message, state: FSMContext):
     text = message.text.strip()
-    if text not in ["Bybit", "HTX"]:
+    if text not in ["Bybit", "HTX", "Bybit/HTX"]:
         await message.answer(
             "Пожалуйста, выберите биржу с кнопок.",
             reply_markup=exchange_kb(),
