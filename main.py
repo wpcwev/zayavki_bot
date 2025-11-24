@@ -2,7 +2,8 @@ import os
 import asyncio
 import json
 from pathlib import Path
-
+from dotenv import load_dotenv
+load_dotenv()
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.enums import ParseMode, ChatType
 from aiogram.filters import CommandStart, Command
@@ -22,11 +23,11 @@ from aiogram.types import (
 # =========================
 
 BOT_TOKEN = os.getenv("TGTOKEN")
-TARGET_CHAT_ID = -1002909872942 # id чата для публикации заявок
+#TARGET_CHAT_ID = -1002909872942 # id чата для публикации заявок
+TARGET_CHAT_ID = int(os.getenv("TARGET_CHAT_ID", "0"))
 
 COUNTER_FILE = "counter.json"
 TEMPLATES_FILE = "templates.json"
-
 PUBLISH_CB = "publish_request"
 CANCEL_CB = "cancel_request"
 SAVE_TEMPLATE_CB = "save_template"
@@ -384,7 +385,7 @@ async def template_selected(callback: CallbackQuery, state: FSMContext):
         f"📥 Источник трафика: {tpl.get('traffic')}\n"
         f"📈 Биржа: {tpl.get('exchange')}\n"
         f"📄 Условия: {tpl.get('conditions')}\n\n"
-        "Теперь введи суммы заявки одним сообщением.\n"
+        "Теперь введи сумму заявки одним сообщением.\n"
         "Можно несколько сумм, каждую с новой строки.\n"
         "Например: 100000\n20000-50000",
         reply_markup=ReplyKeyboardRemove(),
